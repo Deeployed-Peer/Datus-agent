@@ -131,15 +131,19 @@ class ChatCommands:
                 agent_config=self.cli.agent_config,
             )
 
+    # Defines a method to create input objects for different agentic nodes.
     def create_node_input(
         self, user_message: str, current_node, at_tables, at_metrics, at_sqls, plan_mode: bool = False
     ):
         """Create node input based on node type - shared logic for CLI and web"""
+        # Import necessary agentic node classes
         from datus.agent.node.gen_sql_agentic_node import GenSQLAgenticNode
         from datus.agent.node.semantic_agentic_node import SemanticAgenticNode
         from datus.agent.node.sql_summary_agentic_node import SqlSummaryAgenticNode
 
+        # Check if the current node is a SemanticAgenticNode
         if isinstance(current_node, SemanticAgenticNode):
+            # Import the specific input model for SemanticAgenticNode
             from datus.schemas.semantic_agentic_node_models import SemanticNodeInput
 
             return (
